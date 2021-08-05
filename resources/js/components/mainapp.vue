@@ -1,6 +1,6 @@
 <template>
     <div>
-       <div>
+      <div >
       <!--========== ADMIN SIDE MENU one ========-->
       <div class="_1side_menu" >
         <div class="_1side_menu_logo">
@@ -18,8 +18,10 @@
           <!--~~~ MENU LIST  ปุ่มข้างๆๆๆๆ~~~~~~-->
           <div class="_1side_menu_list">
             <ul class="_1side_menu_list_ul">
+               <li><router-link to="adminusers"><Icon type="ios-speedometer" /> Admin Users</router-link></li>
                <li><router-link to="Home"><Icon type="ios-speedometer" /> Dashbord</router-link></li>
-              <li><router-link to="tags"><Icon type="ios-speedometer" /> tags</router-link></li>
+              <li><router-link to="tags"><Icon type="ios-speedometer" />Tags</router-link></li>
+              <li><router-link to="Category"><Icon type="ios-speedometer" /> Category</router-link></li>
 
               
 
@@ -47,3 +49,12 @@
     	<router-view/>
     </div>
 </template>
+<script>
+export default {
+  data(){
+    return{
+      isLoggedIn : false,
+    }
+  }
+}
+</script>

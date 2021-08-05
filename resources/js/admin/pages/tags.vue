@@ -23,8 +23,8 @@
 								<td class="_table_name">{{tag.tagName}}</td>
 								<td>{{tag.created_at}}</td>
 								<td>
-									<Button type="info" size="small" @click="showEditModal(tag,i)">Edit</Button>
-									<Button type="error" size="small">Delete</Button>
+									<Button type="info" size="small" @click="showEditModal(tag, i)">Edit</Button>
+									<Button type="error" size="small" @click="showDeletingeModal(tag, i)" :loading="tag.isDeleting">Delete</Button>
 								</td>
 							</tr>
 						</table>
@@ -57,6 +57,21 @@
 						<Button type="primary" @click="editTag" :disabled="isAdding" :loading="isAdding">{{isAdding ? 'Editing..' : 'Edit tag'}}</Button>
 					</div>
 				</Modal>
+
+				<!-- delete alert modal -->
+				<Modal v-model="showDeleteModal" width="360">
+					<p slot="header" style="color:#f60;text-align:center">
+						<Icon type="ios-information-circle"></Icon>
+						<span>Delete confirmation</span>
+					</p>
+					<div style="text-align:center">
+						<p>Are you sure you want to delete tag?.</p>
+						
+					</div>
+					<div slot="footer">
+						<Button type="error" size="large" long :loading="isDeleing" :disabled="isDeleing" @click="deleteTag" >Delete</Button>
+					</div>
+				</Modal> 
 				
 
 			</div>
@@ -78,7 +93,11 @@ export default {
 				tagName:''
 
 			},
-			index :-1
+			index :-1,
+			showDeleteModal: false,
+			isDeleing : false,
+			deleteItem:{},
+			deletingIndex: -1
 		}
 
 	},
@@ -128,6 +147,27 @@ export default {
 			this.editModal = true
 			this.index = index
 
+		},
+		async deleteTag(){
+			this.isDeleing = true
+			//if(!confirm('Are you sure you want to delete this tag?')) return
+			//tag.isDeleting = true
+			//this.$set(tag, 'isDeleting', true)
+			const res = await this.callApi('post', 'app/delete_tag', this.deleteItem)
+			if(res.status===200){
+				this.tags.splice(this.deletingIndex,1)
+				this.s('Tag has been deleted successfully!')
+			}else{
+				this.swr()
+			}
+			this.isDeleing = false
+			this.showDeleteModal = false
+
+		},
+		showDeletingeModal(tag, i){
+			this.deleteItem = tag
+			this.deletingIndex = i
+			this.showDeleteModal = true
 		}
 	},
 	async created(){

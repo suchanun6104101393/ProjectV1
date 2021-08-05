@@ -11,7 +11,13 @@
         <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
 
         <!-- Styles -->
-       
+        <script>
+            (function () {
+                window.Laravel = {
+                    csrfToken: '{{ csrf_token() }}'
+                };
+            })();
+        </script>
     </head>
     <body>
         <div id="app">
