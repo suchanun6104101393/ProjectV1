@@ -2630,6 +2630,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
     return {
@@ -2683,8 +2684,6 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
                 if (res.status === 200) {
                   _this.s(res.data.msg);
-
-                  window.location = '/';
                 } else {
                   if (res.status === 401) {
                     _this.i(res.data.msg);
@@ -2697,7 +2696,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                   }
                 }
 
-                _this.isLogging = true;
+                _this.isLogging = false;
 
               case 12:
               case "end":
@@ -87253,7 +87252,18 @@ var render = function() {
           _c(
             "div",
             { staticClass: "space" },
-            [_c("Input", { attrs: { type: "email", placeholder: "Email" } })],
+            [
+              _c("Input", {
+                attrs: { type: "email", placeholder: "Email" },
+                model: {
+                  value: _vm.data.email,
+                  callback: function($$v) {
+                    _vm.$set(_vm.data, "email", $$v)
+                  },
+                  expression: "data.email"
+                }
+              })
+            ],
             1
           ),
           _vm._v(" "),
@@ -87262,7 +87272,14 @@ var render = function() {
             { staticClass: "space" },
             [
               _c("Input", {
-                attrs: { type: "password", placeholder: "Password" }
+                attrs: { type: "password", placeholder: "******" },
+                model: {
+                  value: _vm.data.password,
+                  callback: function($$v) {
+                    _vm.$set(_vm.data, "password", $$v)
+                  },
+                  expression: "data.password"
+                }
               })
             ],
             1
@@ -87298,7 +87315,7 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("div", { staticClass: "login_header" }, [
-      _c("h1", [_vm._v("Login")])
+      _c("h1", [_vm._v("Login ")])
     ])
   }
 ]
@@ -87654,93 +87671,95 @@ var render = function() {
   return _c(
     "div",
     [
-      _c("div", [
-        _c("div", { staticClass: "_1side_menu" }, [
-          _vm._m(0),
-          _vm._v(" "),
-          _c("div", { staticClass: "_1side_menu_content" }, [
-            _vm._m(1),
+      _vm.isLoggedIn
+        ? _c("div", [
+            _c("div", { staticClass: "_1side_menu" }, [
+              _vm._m(0),
+              _vm._v(" "),
+              _c("div", { staticClass: "_1side_menu_content" }, [
+                _vm._m(1),
+                _vm._v(" "),
+                _c("div", { staticClass: "_1side_menu_list" }, [
+                  _c("ul", { staticClass: "_1side_menu_list_ul" }, [
+                    _c(
+                      "li",
+                      [
+                        _c(
+                          "router-link",
+                          { attrs: { to: "adminusers" } },
+                          [
+                            _c("Icon", { attrs: { type: "ios-speedometer" } }),
+                            _vm._v(" Admin Users")
+                          ],
+                          1
+                        )
+                      ],
+                      1
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "li",
+                      [
+                        _c(
+                          "router-link",
+                          { attrs: { to: "Home" } },
+                          [
+                            _c("Icon", { attrs: { type: "ios-speedometer" } }),
+                            _vm._v(" Dashbord")
+                          ],
+                          1
+                        )
+                      ],
+                      1
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "li",
+                      [
+                        _c(
+                          "router-link",
+                          { attrs: { to: "tags" } },
+                          [
+                            _c("Icon", { attrs: { type: "ios-speedometer" } }),
+                            _vm._v("Tags")
+                          ],
+                          1
+                        )
+                      ],
+                      1
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "li",
+                      [
+                        _c(
+                          "router-link",
+                          { attrs: { to: "Category" } },
+                          [
+                            _c("Icon", { attrs: { type: "ios-speedometer" } }),
+                            _vm._v(" Category")
+                          ],
+                          1
+                        )
+                      ],
+                      1
+                    )
+                  ])
+                ])
+              ])
+            ]),
             _vm._v(" "),
-            _c("div", { staticClass: "_1side_menu_list" }, [
-              _c("ul", { staticClass: "_1side_menu_list_ul" }, [
-                _c(
-                  "li",
-                  [
-                    _c(
-                      "router-link",
-                      { attrs: { to: "adminusers" } },
-                      [
-                        _c("Icon", { attrs: { type: "ios-speedometer" } }),
-                        _vm._v(" Admin Users")
-                      ],
-                      1
-                    )
-                  ],
-                  1
-                ),
-                _vm._v(" "),
-                _c(
-                  "li",
-                  [
-                    _c(
-                      "router-link",
-                      { attrs: { to: "Home" } },
-                      [
-                        _c("Icon", { attrs: { type: "ios-speedometer" } }),
-                        _vm._v(" Dashbord")
-                      ],
-                      1
-                    )
-                  ],
-                  1
-                ),
-                _vm._v(" "),
-                _c(
-                  "li",
-                  [
-                    _c(
-                      "router-link",
-                      { attrs: { to: "tags" } },
-                      [
-                        _c("Icon", { attrs: { type: "ios-speedometer" } }),
-                        _vm._v("Tags")
-                      ],
-                      1
-                    )
-                  ],
-                  1
-                ),
-                _vm._v(" "),
-                _c(
-                  "li",
-                  [
-                    _c(
-                      "router-link",
-                      { attrs: { to: "Category" } },
-                      [
-                        _c("Icon", { attrs: { type: "ios-speedometer" } }),
-                        _vm._v(" Category")
-                      ],
-                      1
-                    )
-                  ],
-                  1
-                )
+            _c("div", { staticClass: "header" }, [
+              _c("div", { staticClass: "_2menu _box_shadow" }, [
+                _c("div", { staticClass: "_2menu_logo" }, [
+                  _c("ul", { staticClass: "open_button" }, [
+                    _c("li", [_c("Icon", { attrs: { type: "ios-list" } })], 1)
+                  ])
+                ])
               ])
             ])
           ])
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "header" }, [
-          _c("div", { staticClass: "_2menu _box_shadow" }, [
-            _c("div", { staticClass: "_2menu_logo" }, [
-              _c("ul", { staticClass: "open_button" }, [
-                _c("li", [_c("Icon", { attrs: { type: "ios-list" } })], 1)
-              ])
-            ])
-          ])
-        ])
-      ]),
+        : _vm._e(),
       _vm._v(" "),
       _c("router-view")
     ],

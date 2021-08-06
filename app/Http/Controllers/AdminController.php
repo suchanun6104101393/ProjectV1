@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 use App\models\Tag;
 use App\models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;         //login Auth
+
 
 class AdminController extends Controller
 {
@@ -80,18 +82,10 @@ class AdminController extends Controller
 
 
 
-
-
-
-
-
-
-
-
-  /*   public function adminLogin(Request $request){
+     public function adminLogin(Request $request){
         //validate request
         $this->validate($request,[
-            'email' => 'required',
+            'email' => 'bail|required|email',
             'password' => 'bail|required|min:6',
         ]);
         if(Auth::attempt(['email' => $request->email, 'password' => $request->password])){
@@ -103,11 +97,11 @@ class AdminController extends Controller
         }else{
             return response()->json([
                 'msg' => 'Incorrect login details',
-            ]);
+            ],401);
             
         }
 
-    } */
+    } 
 
 
 }
